@@ -1,0 +1,413 @@
+{
+  "id": "tW7GUAczQFTZXt",
+  "title": "你看看下面这个 terraform 脚本，需要我提供什么信息...",
+  "createdAt": 1791620381917,
+  "updatedAt": 1791626151639,
+  "cwd": "/home/zeromixs/mango",
+  "actualUsage": {
+    "bigmodel-coding-plan/glm-5.2": {
+      "promptTokens": 7232475,
+      "completionTokens": 35533,
+      "totalTokens": 7268008,
+      "cachedTokens": 7076736
+    }
+  },
+  "lastSeq": 319,
+  "lastReadSeq": 319,
+  "projectId": "9gwlDGPLMfovck",
+  "config": {
+    "capabilities": {},
+    "permission": {
+      "mode": "auto",
+      "aliases": {
+        "Glob": "Read",
+        "Grep": "Read",
+        "Ls": "Read",
+        "Edit": "Write",
+        "MultiEdit": "Write"
+      },
+      "rules": {
+        "Bash": {
+          "deny": [
+            "rm -rf /*",
+            "rm -rf ~*",
+            "rm -rf $HOME*",
+            "dd *",
+            "mkfs *",
+            "shutdown *",
+            "reboot *"
+          ],
+          "allow": [
+            "ls *",
+            "cat *",
+            "echo *",
+            "pwd",
+            "head *",
+            "tail *",
+            "grep *",
+            "find *",
+            "wc *",
+            "which *",
+            "diff *",
+            "stat *",
+            "du *",
+            "git status*",
+            "git log*",
+            "git diff*",
+            "git branch*",
+            "node --version",
+            "npm --version",
+            "python3 --version",
+            "pip *",
+            "*",
+            "python3 *"
+          ]
+        },
+        "Read": {
+          "deny": [
+            "*.env",
+            "*id_rsa*",
+            "*credentials*",
+            "*\\.ssh/*",
+            "*.pem",
+            "*.key",
+            "*.p12",
+            "*.pfx",
+            "*.git-credentials",
+            ".kube/config",
+            "*\\.docker/config*",
+            "*.netrc",
+            "*\\.aws/credentials*"
+          ],
+          "allow": [
+            "./**"
+          ]
+        },
+        "Write": {
+          "ask": [
+            ".git/**",
+            ".ssh/**",
+            "*.env",
+            "**/.npmrc",
+            "**/.zshrc",
+            "**/.bashrc",
+            "**/.bash_profile",
+            "**/.zprofile",
+            "**/.profile",
+            "**/.envrc",
+            "**/.yarnrc",
+            "**/.yarnrc.yml",
+            "**/.pre-commit-config.yaml",
+            "**/lefthook.yml",
+            "*.pem",
+            "*.key",
+            "*.p12",
+            "*.pfx"
+          ],
+          "allow": [
+            "./**"
+          ]
+        },
+        "WebFetch": {
+          "allow": [
+            "*"
+          ]
+        },
+        "WebSearch": {
+          "allow": [
+            "*"
+          ]
+        },
+        "HttpRequest": {
+          "allow": [
+            "GET:*",
+            "HEAD:*"
+          ]
+        },
+        "WebBrowse": {
+          "allow": [
+            "read:*",
+            "screenshot:*",
+            "dom:*",
+            "console:*",
+            "network:*",
+            "cookies:*"
+          ]
+        },
+        "DatabaseQuery": {
+          "allow": [
+            "select:*",
+            "pragma:*"
+          ]
+        },
+        "GenerateImage": {
+          "allow": []
+        },
+        "AnalyzeImage": {
+          "allow": []
+        },
+        "OCR": {
+          "allow": []
+        },
+        "ProcessImage": {
+          "allow": [
+            "./**"
+          ]
+        },
+        "GenerateVideo": {
+          "allow": []
+        },
+        "SyncData": {
+          "allow": [
+            "status"
+          ]
+        },
+        "CreateCronTask": {
+          "allow": []
+        },
+        "UpdateCronTask": {
+          "allow": []
+        },
+        "DeleteCronTask": {
+          "allow": []
+        }
+      }
+    },
+    "model": "bigmodel-coding-plan/glm-5.2",
+    "lastTurnProvider": "api"
+  },
+  "rev": 371,
+  "dirtyBubbles": [
+    "qhWKPK1HHf2MGU",
+    "7SBeerJJBQptqo",
+    "3x9KMoAbkk884n",
+    "BUi3JGHDOe5Rqs",
+    "8es6IlgDQw6Zzz",
+    "LG6fvHJECC92We",
+    "FBvRXQYiWGSPHS",
+    "1kDFzHQXyH9etq",
+    "23tViatmPYmY4W",
+    "e1jjY1S80Hv9X4",
+    "KSXAyCK9sQRddU",
+    "V3JwhipGTciH8m",
+    "2J4MeF1lRBcQ8F",
+    "I5mHjy2hqZoJzu",
+    "KJX3YAk7i2ty0q",
+    "oZeJJX5MpjifK2",
+    "WjOAjn5minZiKu",
+    "LybNa7SjnTAchv",
+    "nvFe706Gkc7Kg0",
+    "AsrmlF0BFoTUQr",
+    "q888OVqLRHhi68",
+    "jMPXA21kGIfwj1",
+    "NZfVdwl5HKi5Ma",
+    "Q6AxKRKKgkAo1q"
+  ],
+  "backgroundJobs": [
+    {
+      "id": "bg-1",
+      "toolName": "Bash",
+      "title": "cd ~/mango/home-network && export AWS_PROFILE=home-networ...",
+      "input": {
+        "command": "cd ~/mango/home-network && export AWS_PROFILE=home-network && ./terraform init -no-color 2>&1 | tail -5 && ./terraform apply -auto-approve -no-color > apply.log 2>&1; echo \"exit=$?\"; tail -30 apply.log",
+        "background": true
+      },
+      "status": "completed",
+      "createdAt": 1791620971821,
+      "finishedAt": 1791620990302,
+      "sessionId": "tW7GUAczQFTZXt",
+      "outputFile": "/home/zeromixs/.mango/projects/9gwlDGPLMfovck/sessions/tW7GUAczQFTZXt/bg-output/bg-1.log",
+      "result": "exit 0\nshould now work.\n\nIf you ever set or change modules or backend configuration for Terraform,\nrerun this command to reinitialize your working directory. If you forget, other\ncommands will detect it and remind you to do so if necessary.\nexit=1\n      + numeric     = true\n      + result      = (sensitive value)\n      + special     = false\n      + upper       = true\n    }\n\n  # tls_private_key.tls_private_key will be created\n  + resource \"tls_private_key\" \"tls_private_key\" {\n      + algorithm                     = \"RSA\"\n      + ecdsa_curve                   = \"P224\"\n      + id                            = (known after apply)\n      + private_key_openssh           = (sensitive value)\n      + private_key_pem               = (sensitive value)\n      + private_key_pem_pkcs8         = (sensitive value)\n      + public_key_fingerprint_md5    = (known after apply)\n      + public_key_fingerprint_sha256 = (known after apply)\n      + public_key_openssh            = (known after apply)\n      + public_key_pem                = (known after apply)\n      + rsa_bits                      = 4096\n    }\n\nPlan: 13 to add, 0 to change, 0 to destroy.\n\nError: reading EC2 AMIs: UnauthorizedOperation: You are not authorized to perform this operation. User: arn:aws:iam::099029529726:user/zeromixs is not authorized to perform: ec2:DescribeImages because no identity-based policy allows the ec2:DescribeImages action\n\tstatus code: 403, request id: ac61c8e7-c68b-41ba-b392-a2991048cef7\n\n  with data.aws_ami.ubuntu_22,\n  on main.tf line 42, in data \"aws_ami\" \"ubuntu_22\":\n  42: data \"aws_ami\" \"ubuntu_22\" {\n\n",
+      "data": {
+        "command": "cd ~/mango/home-network && export AWS_PROFILE=home-network && ./terraform init -no-color 2>&1 | tail -5 && ./terraform apply -auto-approve -no-color > apply.log 2>&1; echo \"exit=$?\"; tail -30 apply.log",
+        "stdout": "should now work.\n\nIf you ever set or change modules or backend configuration for Terraform,\nrerun this command to reinitialize your working directory. If you forget, other\ncommands will detect it and remind you to do so if necessary.\nexit=1\n      + numeric     = true\n      + result      = (sensitive value)\n      + special     = false\n      + upper       = true\n    }\n\n  # tls_private_key.tls_private_key will be created\n  + resource \"tls_private_key\" \"tls_private_key\" {\n      + algorithm                     = \"RSA\"\n      + ecdsa_curve                   = \"P224\"\n      + id                            = (known after apply)\n      + private_key_openssh           = (sensitive value)\n      + private_key_pem               = (sensitive value)\n      + private_key_pem_pkcs8         = (sensitive value)\n      + public_key_fingerprint_md5    = (known after apply)\n      + public_key_fingerprint_sha256 = (known after apply)\n      + public_key_openssh            = (known after apply)\n      + public_key_pem                = (known after apply)\n      + rsa_bits                      = 4096\n    }\n\nPlan: 13 to add, 0 to change, 0 to destroy.\n\nError: reading EC2 AMIs: UnauthorizedOperation: You are not authorized to perform this operation. User: arn:aws:iam::099029529726:user/zeromixs is not authorized to perform: ec2:DescribeImages because no identity-based policy allows the ec2:DescribeImages action\n\tstatus code: 403, request id: ac61c8e7-c68b-41ba-b392-a2991048cef7\n\n  with data.aws_ami.ubuntu_22,\n  on main.tf line 42, in data \"aws_ami\" \"ubuntu_22\":\n  42: data \"aws_ami\" \"ubuntu_22\" {",
+        "stderr": "",
+        "exitCode": 0,
+        "durationMs": 18477,
+        "timedOut": false,
+        "stdoutCapped": false,
+        "stderrCapped": false
+      }
+    },
+    {
+      "id": "bg-2",
+      "toolName": "Bash",
+      "title": "cd ~/mango/home-network && export AWS_PROFILE=home-networ...",
+      "input": {
+        "command": "cd ~/mango/home-network && export AWS_PROFILE=home-network && ./terraform apply -auto-approve -no-color > apply.log 2>&1; echo \"exit=$?\"; tail -40 apply.log",
+        "background": true
+      },
+      "status": "completed",
+      "createdAt": 1791621089421,
+      "finishedAt": 1791621092605,
+      "sessionId": "tW7GUAczQFTZXt",
+      "outputFile": "/home/zeromixs/.mango/projects/9gwlDGPLMfovck/sessions/tW7GUAczQFTZXt/bg-output/bg-2.log",
+      "result": "exit 0\nexit=1\n  + resource \"random_password\" \"ss_password\" {\n      + bcrypt_hash = (sensitive value)\n      + id          = (known after apply)\n      + length      = 16\n      + lower       = true\n      + min_lower   = 0\n      + min_numeric = 0\n      + min_special = 0\n      + min_upper   = 0\n      + number      = true\n      + numeric     = true\n      + result      = (sensitive value)\n      + special     = false\n      + upper       = true\n    }\n\n  # tls_private_key.tls_private_key will be created\n  + resource \"tls_private_key\" \"tls_private_key\" {\n      + algorithm                     = \"RSA\"\n      + ecdsa_curve                   = \"P224\"\n      + id                            = (known after apply)\n      + private_key_openssh           = (sensitive value)\n      + private_key_pem               = (sensitive value)\n      + private_key_pem_pkcs8         = (sensitive value)\n      + public_key_fingerprint_md5    = (known after apply)\n      + public_key_fingerprint_sha256 = (known after apply)\n      + public_key_openssh            = (known after apply)\n      + public_key_pem                = (known after apply)\n      + rsa_bits                      = 4096\n    }\n\nPlan: 13 to add, 0 to change, 0 to destroy.\n\nError: reading EC2 AMIs: UnauthorizedOperation: You are not authorized to perform this operation. User: arn:aws:iam::099029529726:user/zeromixs is not authorized to perform: ec2:DescribeImages because no identity-based policy allows the ec2:DescribeImages action\n\tstatus code: 403, request id: daaa55a7-9b14-4695-8293-fd603f4b3dc2\n\n  with data.aws_ami.ubuntu_22,\n  on main.tf line 42, in data \"aws_ami\" \"ubuntu_22\":\n  42: data \"aws_ami\" \"ubuntu_22\" {\n\n",
+      "data": {
+        "command": "cd ~/mango/home-network && export AWS_PROFILE=home-network && ./terraform apply -auto-approve -no-color > apply.log 2>&1; echo \"exit=$?\"; tail -40 apply.log",
+        "stdout": "exit=1\n  + resource \"random_password\" \"ss_password\" {\n      + bcrypt_hash = (sensitive value)\n      + id          = (known after apply)\n      + length      = 16\n      + lower       = true\n      + min_lower   = 0\n      + min_numeric = 0\n      + min_special = 0\n      + min_upper   = 0\n      + number      = true\n      + numeric     = true\n      + result      = (sensitive value)\n      + special     = false\n      + upper       = true\n    }\n\n  # tls_private_key.tls_private_key will be created\n  + resource \"tls_private_key\" \"tls_private_key\" {\n      + algorithm                     = \"RSA\"\n      + ecdsa_curve                   = \"P224\"\n      + id                            = (known after apply)\n      + private_key_openssh           = (sensitive value)\n      + private_key_pem               = (sensitive value)\n      + private_key_pem_pkcs8         = (sensitive value)\n      + public_key_fingerprint_md5    = (known after apply)\n      + public_key_fingerprint_sha256 = (known after apply)\n      + public_key_openssh            = (known after apply)\n      + public_key_pem                = (known after apply)\n      + rsa_bits                      = 4096\n    }\n\nPlan: 13 to add, 0 to change, 0 to destroy.\n\nError: reading EC2 AMIs: UnauthorizedOperation: You are not authorized to perform this operation. User: arn:aws:iam::099029529726:user/zeromixs is not authorized to perform: ec2:DescribeImages because no identity-based policy allows the ec2:DescribeImages action\n\tstatus code: 403, request id: daaa55a7-9b14-4695-8293-fd603f4b3dc2\n\n  with data.aws_ami.ubuntu_22,\n  on main.tf line 42, in data \"aws_ami\" \"ubuntu_22\":\n  42: data \"aws_ami\" \"ubuntu_22\" {",
+        "stderr": "",
+        "exitCode": 0,
+        "durationMs": 3184,
+        "timedOut": false,
+        "stdoutCapped": false,
+        "stderrCapped": false
+      }
+    },
+    {
+      "id": "bg-3",
+      "toolName": "Bash",
+      "title": "cd ~/mango/home-network && export AWS_PROFILE=home-networ...",
+      "input": {
+        "command": "cd ~/mango/home-network && export AWS_PROFILE=home-network && ./terraform apply -auto-approve -no-color > apply.log 2>&1; echo \"exit=$?\" >> apply.log",
+        "background": true
+      },
+      "status": "completed",
+      "createdAt": 1791621149997,
+      "finishedAt": 1791621281558,
+      "sessionId": "tW7GUAczQFTZXt",
+      "outputFile": "/home/zeromixs/.mango/projects/9gwlDGPLMfovck/sessions/tW7GUAczQFTZXt/bg-output/bg-3.log",
+      "result": "exit 0\n",
+      "data": {
+        "command": "cd ~/mango/home-network && export AWS_PROFILE=home-network && ./terraform apply -auto-approve -no-color > apply.log 2>&1; echo \"exit=$?\" >> apply.log",
+        "stdout": "",
+        "stderr": "",
+        "exitCode": 0,
+        "durationMs": 131560,
+        "timedOut": false,
+        "stdoutCapped": false,
+        "stderrCapped": false
+      }
+    },
+    {
+      "id": "bg-4",
+      "toolName": "Bash",
+      "title": "cd ~/mango/home-network && export AWS_PROFILE=home-networ...",
+      "input": {
+        "command": "cd ~/mango/home-network && export AWS_PROFILE=home-network && ./terraform apply -auto-approve -no-color > apply.log 2>&1; echo \"exit=$?\" >> apply.log",
+        "background": true
+      },
+      "status": "completed",
+      "createdAt": 1791621360648,
+      "finishedAt": 1791621362064,
+      "sessionId": "tW7GUAczQFTZXt",
+      "outputFile": "/home/zeromixs/.mango/projects/9gwlDGPLMfovck/sessions/tW7GUAczQFTZXt/bg-output/bg-4.log",
+      "result": "exit 0\n",
+      "data": {
+        "command": "cd ~/mango/home-network && export AWS_PROFILE=home-network && ./terraform apply -auto-approve -no-color > apply.log 2>&1; echo \"exit=$?\" >> apply.log",
+        "stdout": "",
+        "stderr": "",
+        "exitCode": 0,
+        "durationMs": 1415,
+        "timedOut": false,
+        "stdoutCapped": false,
+        "stderrCapped": false
+      }
+    },
+    {
+      "id": "bg-5",
+      "toolName": "Bash",
+      "title": "cd ~/mango/home-network && export AWS_PROFILE=home-networ...",
+      "input": {
+        "command": "cd ~/mango/home-network && export AWS_PROFILE=home-network && ./terraform apply -auto-approve -no-color > apply.log 2>&1; echo \"exit=$?\" >> apply.log",
+        "background": true
+      },
+      "status": "completed",
+      "createdAt": 1791621413159,
+      "finishedAt": 1791621420357,
+      "sessionId": "tW7GUAczQFTZXt",
+      "outputFile": "/home/zeromixs/.mango/projects/9gwlDGPLMfovck/sessions/tW7GUAczQFTZXt/bg-output/bg-5.log",
+      "result": "exit 0\n",
+      "data": {
+        "command": "cd ~/mango/home-network && export AWS_PROFILE=home-network && ./terraform apply -auto-approve -no-color > apply.log 2>&1; echo \"exit=$?\" >> apply.log",
+        "stdout": "",
+        "stderr": "",
+        "exitCode": 0,
+        "durationMs": 7197,
+        "timedOut": false,
+        "stdoutCapped": false,
+        "stderrCapped": false
+      }
+    },
+    {
+      "id": "bg-6",
+      "toolName": "Bash",
+      "title": "cd ~/mango/home-network && sed -i 's/instance_type       ...",
+      "input": {
+        "command": "cd ~/mango/home-network && sed -i 's/instance_type               = \"t2.nano\"/instance_type               = \"t3.micro\" # 免费套餐规格（t2.nano 被新账号限制拒绝）/' main.tf && export AWS_PROFILE=home-network && ./terraform apply -auto-approve -no-color > apply.log 2>&1; echo \"exit=$?\" >> apply.log",
+        "background": true
+      },
+      "status": "completed",
+      "createdAt": 1791621444612,
+      "finishedAt": 1791621465090,
+      "sessionId": "tW7GUAczQFTZXt",
+      "outputFile": "/home/zeromixs/.mango/projects/9gwlDGPLMfovck/sessions/tW7GUAczQFTZXt/bg-output/bg-6.log",
+      "result": "exit 0\n",
+      "data": {
+        "command": "cd ~/mango/home-network && sed -i 's/instance_type               = \"t2.nano\"/instance_type               = \"t3.micro\" # 免费套餐规格（t2.nano 被新账号限制拒绝）/' main.tf && export AWS_PROFILE=home-network && ./terraform apply -auto-approve -no-color > apply.log 2>&1; echo \"exit=$?\" >> apply.log",
+        "stdout": "",
+        "stderr": "",
+        "exitCode": 0,
+        "durationMs": 20478,
+        "timedOut": false,
+        "stdoutCapped": false,
+        "stderrCapped": false
+      }
+    },
+    {
+      "id": "bg-7",
+      "toolName": "Bash",
+      "title": "cd ~/mango/home-network/client && wget -q --timeout=120 h...",
+      "input": {
+        "command": "cd ~/mango/home-network/client && wget -q --timeout=120 https://github.com/xjasonlyu/tun2socks/releases/download/v2.5.2/tun2socks-linux-amd64.gz && gunzip -f tun2socks-linux-amd64.gz && chmod +x tun2socks-linux-amd64 && ./tun2socks-linux-amd64 -version",
+        "timeout": 200000,
+        "background": true
+      },
+      "status": "failed",
+      "createdAt": 1791623516513,
+      "finishedAt": 1791623517187,
+      "sessionId": "tW7GUAczQFTZXt",
+      "outputFile": "/home/zeromixs/.mango/projects/9gwlDGPLMfovck/sessions/tW7GUAczQFTZXt/bg-output/bg-7.log",
+      "result": "exit 8\n",
+      "error": "exit code 8",
+      "data": {
+        "command": "cd ~/mango/home-network/client && wget -q --timeout=120 https://github.com/xjasonlyu/tun2socks/releases/download/v2.5.2/tun2socks-linux-amd64.gz && gunzip -f tun2socks-linux-amd64.gz && chmod +x tun2socks-linux-amd64 && ./tun2socks-linux-amd64 -version",
+        "stdout": "",
+        "stderr": "",
+        "exitCode": 8,
+        "durationMs": 673,
+        "timedOut": false,
+        "stdoutCapped": false,
+        "stderrCapped": false
+      }
+    },
+    {
+      "id": "bg-8",
+      "toolName": "Bash",
+      "title": "cd ~/mango/home-network/client && curl -sSL --max-time 12...",
+      "input": {
+        "command": "cd ~/mango/home-network/client && curl -sSL --max-time 120 -o tun2socks.zip https://github.com/xjasonlyu/tun2socks/releases/download/v2.7.0/tun2socks-linux-amd64.zip && unzip -o -q tun2socks.zip tun2socks-linux-amd64 && chmod +x tun2socks-linux-amd64 && ./tun2socks-linux-amd64 -version",
+        "timeout": 180000,
+        "background": true
+      },
+      "status": "failed",
+      "createdAt": 1791623580494,
+      "finishedAt": 1791623582205,
+      "sessionId": "tW7GUAczQFTZXt",
+      "outputFile": "/home/zeromixs/.mango/projects/9gwlDGPLMfovck/sessions/tW7GUAczQFTZXt/bg-output/bg-8.log",
+      "result": "exit 2\nUsage of ./tun2socks-linux-amd64:\n  -c, --config string              YAML format configuration file\n  -d, --device string              Use this device [driver://]name\n      --fwmark int                 Set firewall MARK (Linux/BSD)\n      --interface string           Use network INTERFACE (Linux/MacOS/Windows)\n      --loglevel string            Log level [debug|info|warn|error|silent] (default \"info\")\n      --mtu int                    Set device maximum transmission unit (MTU)\n      --multicast-groups strings   Set multicast groups, separated by commas\n  -p, --proxy string               Use this proxy [protocol://]host[:port]\n      --restapi string             HTTP statistic server listen address\n      --tcp-auto-tuning            Enable TCP receive buffer auto-tuning\n      --tcp-rcvbuf string          Set TCP receive buffer size for netstack\n      --tcp-sndbuf string          Set TCP send buffer size for netstack\n      --tun-post-up string         Execute a command after TUN device setup\n      --tun-pre-up string          Execute a command before TUN device setup\n      --udp-timeout duration       Set timeout for each UDP session\n  -v, --version                    Show version and then quit\nunknown shorthand flag: 'e' in -ersion\n",
+      "error": "exit code 2",
+      "data": {
+        "command": "cd ~/mango/home-network/client && curl -sSL --max-time 120 -o tun2socks.zip https://github.com/xjasonlyu/tun2socks/releases/download/v2.7.0/tun2socks-linux-amd64.zip && unzip -o -q tun2socks.zip tun2socks-linux-amd64 && chmod +x tun2socks-linux-amd64 && ./tun2socks-linux-amd64 -version",
+        "stdout": "",
+        "stderr": "Usage of ./tun2socks-linux-amd64:\n  -c, --config string              YAML format configuration file\n  -d, --device string              Use this device [driver://]name\n      --fwmark int                 Set firewall MARK (Linux/BSD)\n      --interface string           Use network INTERFACE (Linux/MacOS/Windows)\n      --loglevel string            Log level [debug|info|warn|error|silent] (default \"info\")\n      --mtu int                    Set device maximum transmission unit (MTU)\n      --multicast-groups strings   Set multicast groups, separated by commas\n  -p, --proxy string               Use this proxy [protocol://]host[:port]\n      --restapi string             HTTP statistic server listen address\n      --tcp-auto-tuning            Enable TCP receive buffer auto-tuning\n      --tcp-rcvbuf string          Set TCP receive buffer size for netstack\n      --tcp-sndbuf string          Set TCP send buffer size for netstack\n      --tun-post-up string         Execute a command after TUN device setup\n      --tun-pre-up string          Execute a command before TUN device setup\n      --udp-timeout duration       Set timeout for each UDP session\n  -v, --version                    Show version and then quit\nunknown shorthand flag: 'e' in -ersion",
+        "exitCode": 2,
+        "durationMs": 1709,
+        "timedOut": false,
+        "stdoutCapped": false,
+        "stderrCapped": false
+      }
+    }
+  ],
+  "truncateRev": 2
+}
