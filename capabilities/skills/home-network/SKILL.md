@@ -42,3 +42,4 @@ ssh zeromixs@100.109.165.99 'dig @127.0.0.1 www.google.com A +short +time=3 +tri
 - 主机有 IPv6 默认路由，当前仅 IPv4 代理；Google IPv6 直连失败。Steam 全直连、局域网试点、真实重启验证以及运行中 tun2socks 单独退出时的恢复机制尚未完成。
 - DNS 经可信上游失败时国内白名单可能仍可解析，其他域名会失败；代理服务是否自恢复要看日志/健康检查，不能只看 `active`。
 - Terraform SSH 私钥、SS 密码、Mango token 都是敏感资料：不在对话、日志和技能中回显。曾在排障输出中泄露旧凭据，后续安排轮换，但轮换需与客户端、服务端同步并经用户确认。
+- 移动蜂窝网络（223.104.x 段出口）到境外 IP 高端口的 TCP SYN-ACK 回包被运营商丢弃（表现为「只有上传没下载」/timeout），WiFi（120.244.x）正常。缓解：AWS 服务器已手工加开 **443 端口** ss 实例（`shadowsocks-libev-port443`，terraform 之外配置，**重建实例后需重做**：/etc/shadowsocks-libev/config-port443.json + systemd 单元 + 安全组放行 443/tcp+udp）。移动端（V2box 等）蜂窝网络下用 443，桌面端继续 48891。诊断方法：服务端 `tcpdump -i ens5 -nn port <端口>` 看 SYN-ACK 是否重传无 ACK。
