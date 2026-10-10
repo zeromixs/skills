@@ -1,0 +1,286 @@
+{
+  "id": "dDgCLe4fDdzE9G",
+  "title": "激活技能并部署Mango到SSH服务器",
+  "createdAt": 1791618601228,
+  "updatedAt": 1791629812867,
+  "cwd": "/Users/mvbj0698/mango",
+  "actualUsage": {
+    "bigmodel-coding-plan/glm-5.2": {
+      "promptTokens": 921256,
+      "completionTokens": 4574,
+      "totalTokens": 925830,
+      "cachedTokens": 884864
+    },
+    "custom/glm-5.2": {
+      "promptTokens": 7741102,
+      "completionTokens": 54282,
+      "totalTokens": 7795384,
+      "cachedTokens": 7586048
+    },
+    "custom/gpt-6-sol": {
+      "promptTokens": 10462314,
+      "completionTokens": 30725,
+      "totalTokens": 10493039,
+      "cachedTokens": 7263232
+    }
+  },
+  "lastSeq": 408,
+  "lastReadSeq": 408,
+  "projectId": "e94af4eb-150e-4474-804f-86804536b7fd",
+  "config": {
+    "capabilities": {
+      "skills": [
+        "code-review",
+        "coding-workflow",
+        "deploy-server",
+        "local-database-optimization",
+        "mango-self-management",
+        "project-exploration",
+        "skill-authoring",
+        "skill-marketplace"
+      ],
+      "agents": [
+        "coder",
+        "explorer",
+        "mango",
+        "planner",
+        "researcher",
+        "reviewer"
+      ],
+      "workflows": [
+        "dev-review"
+      ],
+      "mcpServers": [],
+      "tools": [
+        "Glob",
+        "Read",
+        "Write",
+        "Edit",
+        "MultiEdit",
+        "Ls",
+        "Grep",
+        "Bash",
+        "DatabaseQuery",
+        "DatabaseListTables",
+        "DatabaseImport",
+        "HttpRequest",
+        "WebSearch",
+        "WebFetch",
+        "WebBrowse",
+        "SaveMemory",
+        "RecallMemory",
+        "DeleteMemory",
+        "SearchSessions",
+        "ReadSession",
+        "ReadSummary",
+        "AskSession",
+        "MrCreate",
+        "MrUpdate",
+        "MrReviewStatus",
+        "MrReply",
+        "MrMerge",
+        "GitClone",
+        "GitCreateRepo",
+        "ScheduleTimer",
+        "ListTimers",
+        "CancelTimer",
+        "SetGoal",
+        "AskUserQuestion",
+        "ListBackgroundJobs",
+        "GetBackgroundJobOutput",
+        "CancelBackgroundJob",
+        "SyncData",
+        "CreateCronTask",
+        "ListCronTasks",
+        "UpdateCronTask",
+        "DeleteCronTask",
+        "AnalyzeImage",
+        "GenerateImage",
+        "ProcessImage",
+        "OCR",
+        "GenerateVideo",
+        "TextToSpeech",
+        "ListModels",
+        "Skill",
+        "Agent",
+        "EnterWorktree",
+        "ExitWorktree",
+        "SyncConfig"
+      ]
+    },
+    "permission": {
+      "mode": "auto",
+      "aliases": {
+        "Glob": "Read",
+        "Grep": "Read",
+        "Ls": "Read",
+        "Edit": "Write",
+        "MultiEdit": "Write"
+      },
+      "rules": {
+        "Bash": {
+          "deny": [
+            "rm -rf /*",
+            "rm -rf ~*",
+            "rm -rf $HOME*",
+            "dd *",
+            "mkfs *",
+            "shutdown *",
+            "reboot *"
+          ],
+          "allow": [
+            "ls *",
+            "cat *",
+            "echo *",
+            "pwd",
+            "head *",
+            "tail *",
+            "grep *",
+            "find *",
+            "wc *",
+            "which *",
+            "diff *",
+            "stat *",
+            "du *",
+            "git status*",
+            "git log*",
+            "git diff*",
+            "git branch*",
+            "node --version",
+            "npm --version",
+            "python3 --version"
+          ]
+        },
+        "Read": {
+          "deny": [
+            "*.env",
+            "*id_rsa*",
+            "*credentials*",
+            "*\\.ssh/*",
+            "*.pem",
+            "*.key",
+            "*.p12",
+            "*.pfx",
+            "*.git-credentials",
+            ".kube/config",
+            "*\\.docker/config*",
+            "*.netrc",
+            "*\\.aws/credentials*"
+          ],
+          "allow": [
+            "./**"
+          ]
+        },
+        "Write": {
+          "ask": [
+            ".git/**",
+            ".ssh/**",
+            "*.env",
+            "**/.npmrc",
+            "**/.zshrc",
+            "**/.bashrc",
+            "**/.bash_profile",
+            "**/.zprofile",
+            "**/.profile",
+            "**/.envrc",
+            "**/.yarnrc",
+            "**/.yarnrc.yml",
+            "**/.pre-commit-config.yaml",
+            "**/lefthook.yml",
+            "*.pem",
+            "*.key",
+            "*.p12",
+            "*.pfx"
+          ],
+          "allow": [
+            "./**"
+          ]
+        },
+        "WebFetch": {
+          "allow": [
+            "*"
+          ]
+        },
+        "WebSearch": {
+          "allow": [
+            "*"
+          ]
+        },
+        "HttpRequest": {
+          "allow": [
+            "GET:*",
+            "HEAD:*"
+          ]
+        },
+        "WebBrowse": {
+          "allow": [
+            "read:*",
+            "screenshot:*",
+            "dom:*",
+            "console:*",
+            "network:*",
+            "cookies:*"
+          ]
+        },
+        "DatabaseQuery": {
+          "allow": [
+            "select:*",
+            "pragma:*"
+          ]
+        },
+        "GenerateImage": {
+          "allow": []
+        },
+        "AnalyzeImage": {
+          "allow": []
+        },
+        "OCR": {
+          "allow": []
+        },
+        "ProcessImage": {
+          "allow": [
+            "./**"
+          ]
+        },
+        "GenerateVideo": {
+          "allow": []
+        },
+        "SyncData": {
+          "allow": [
+            "status"
+          ]
+        },
+        "CreateCronTask": {
+          "allow": []
+        },
+        "UpdateCronTask": {
+          "allow": []
+        },
+        "DeleteCronTask": {
+          "allow": []
+        }
+      }
+    },
+    "activatedSkills": [
+      "deploy-server"
+    ],
+    "lastTurnProvider": "api",
+    "model": "mv/gpt-6-sol",
+    "effort": "none"
+  },
+  "rev": 436,
+  "dirtyBubbles": [
+    "rsg3dYZketqA8i",
+    "jZvw87vzY6Rkg4",
+    "QfPOWaLRi7fGRs",
+    "aUxcovB7q7GKlK",
+    "kqFlKc86s3CZe9",
+    "WJ72BWMxnWT2jf",
+    "5WoyjOLMJ0Seg8",
+    "IrqLjvxx4QkMUE",
+    "YwxRepJ6UW2N8j",
+    "cYgijJC5JfJAex",
+    "jtcM3A2U1hoxo5"
+  ],
+  "truncateRev": 1
+}
