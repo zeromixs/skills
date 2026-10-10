@@ -1,0 +1,87 @@
+# ============================================================
+# Mango 同步白名单（默认忽略一切，只同步以下内容）
+# ============================================================
+
+# 默认：忽略所有文件
+*
+
+# --- 允许目录结构（递归进入） ---
+!*/
+!capabilities/
+!capabilities/**
+!projects/
+!projects/*/
+!projects/*/sessions/
+!projects/*/sessions/**
+!projects/*/cron-tasks/
+!projects/*/cron-tasks/**
+!sessions/
+!sessions/**
+
+# --- 允许顶层文件 ---
+!.gitignore
+!permission.json
+!facts.jsonl
+
+# --- 允许项目级文件 ---
+!projects/*/project.json
+!projects/*/permission.json
+
+# ============================================================
+# 明确排除（即使上面允许了，这里再挡一层，防止误入）
+# ============================================================
+
+# 含敏感凭据（API key / GitHub Token / 加密密钥）
+mcp.json
+capabilities/mcp/
+capabilities/mcp/**
+config.json
+config.json.*
+secrets.enc
+
+# TLS 证书 / 私钥
+tls/
+tls/**
+
+# 本地数据库
+data/
+data/**
+
+# 浏览器数据（Cookie/登录态/缓存，体积大，绝不同步）
+browser-data/
+browser-data/**
+
+# 截图 / 生成图片（调试产物，体积大）
+screenshots/
+screenshots/**
+screenshots-evil/
+generated/
+uploads/
+
+# 头像等静态资源（无需同步）
+assets/
+assets/**
+
+# skill 本地数据（token/缓存）
+skill-data/
+skill-data/**
+
+# CLI 输入历史
+history
+
+# cron 执行记录（一次性会话快照，只保留 cron-tasks 任务定义）
+projects/*/cron/
+projects/*/cron/**
+
+# 平台导出数据（可能含业务数据）
+exports/
+exports/**
+
+# 备份 / 系统文件
+*.bak
+*.bk
+*.old
+.DS_Store
+
+# 日志
+*.log
