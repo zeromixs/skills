@@ -2,7 +2,7 @@
   "id": "tW7GUAczQFTZXt",
   "title": "你看看下面这个 terraform 脚本，需要我提供什么信息...",
   "createdAt": 1791620381917,
-  "updatedAt": 1791626151639,
+  "updatedAt": 1791630110933,
   "cwd": "/home/zeromixs/mango",
   "actualUsage": {
     "bigmodel-coding-plan/glm-5.2": {
@@ -12,8 +12,8 @@
       "cachedTokens": 7076736
     }
   },
-  "lastSeq": 319,
-  "lastReadSeq": 319,
+  "lastSeq": 322,
+  "lastReadSeq": 322,
   "projectId": "9gwlDGPLMfovck",
   "config": {
     "capabilities": {},
@@ -173,35 +173,13 @@
         }
       }
     },
-    "model": "bigmodel-coding-plan/glm-5.2",
+    "model": "mv/gpt-6-sol",
+    "effort": "none",
     "lastTurnProvider": "api"
   },
-  "rev": 371,
+  "rev": 376,
   "dirtyBubbles": [
-    "qhWKPK1HHf2MGU",
-    "7SBeerJJBQptqo",
-    "3x9KMoAbkk884n",
-    "BUi3JGHDOe5Rqs",
-    "8es6IlgDQw6Zzz",
-    "LG6fvHJECC92We",
-    "FBvRXQYiWGSPHS",
-    "1kDFzHQXyH9etq",
-    "23tViatmPYmY4W",
-    "e1jjY1S80Hv9X4",
-    "KSXAyCK9sQRddU",
-    "V3JwhipGTciH8m",
-    "2J4MeF1lRBcQ8F",
-    "I5mHjy2hqZoJzu",
-    "KJX3YAk7i2ty0q",
-    "oZeJJX5MpjifK2",
-    "WjOAjn5minZiKu",
-    "LybNa7SjnTAchv",
-    "nvFe706Gkc7Kg0",
-    "AsrmlF0BFoTUQr",
-    "q888OVqLRHhi68",
-    "jMPXA21kGIfwj1",
-    "NZfVdwl5HKi5Ma",
-    "Q6AxKRKKgkAo1q"
+    "furoHKFJu1YE8Y"
   ],
   "backgroundJobs": [
     {
