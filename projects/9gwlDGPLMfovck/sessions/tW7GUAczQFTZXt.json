@@ -2,18 +2,18 @@
   "id": "tW7GUAczQFTZXt",
   "title": "你看看下面这个 terraform 脚本，需要我提供什么信息...",
   "createdAt": 1791620381917,
-  "updatedAt": 1791635133574,
+  "updatedAt": 1791636189621,
   "cwd": "/home/zeromixs/mango",
   "actualUsage": {
     "bigmodel-coding-plan/glm-5.2": {
-      "promptTokens": 9834623,
-      "completionTokens": 43279,
-      "totalTokens": 9877902,
-      "cachedTokens": 9580736
+      "promptTokens": 11561009,
+      "completionTokens": 46362,
+      "totalTokens": 11607371,
+      "cachedTokens": 11298368
     }
   },
-  "lastSeq": 395,
-  "lastReadSeq": 395,
+  "lastSeq": 429,
+  "lastReadSeq": 429,
   "projectId": "9gwlDGPLMfovck",
   "config": {
     "capabilities": {},
@@ -177,7 +177,7 @@
     "effort": "none",
     "lastTurnProvider": "api"
   },
-  "rev": 480,
+  "rev": 518,
   "dirtyBubbles": [
     "furoHKFJu1YE8Y",
     "Q6UWeoAlReNSZv",
@@ -192,7 +192,9 @@
     "jWdNlD1Uj6wde0",
     "ZtNqsDrWZ0yOlQ",
     "wHgq6Ur7IbMKwt",
-    "fezymsyfbFnaas"
+    "fezymsyfbFnaas",
+    "a3fWHHv5nJdbB0",
+    "NG8URlMgr1nn5E"
   ],
   "backgroundJobs": [
     {
