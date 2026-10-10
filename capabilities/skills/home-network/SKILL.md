@@ -14,18 +14,18 @@ description: 当用户提到 home-network、家庭 Ubuntu 主机网络、zeromix
 - `home-network-dns.service`：`client/dns-via-socks.py` 监听 `127.0.0.1:5354` UDP/TCP，借本地 SOCKS5 对可信 DNS 做 TCP 查询；dnsmasq 监听 `127.0.0.1:53`，国内域名在 `client/dnsmasq-cn-domains.conf` 指向国内 DNS，其他走 `127.0.0.1#5354`。`/etc/resolv.conf` 指向 `127.0.0.1`。备份 `/etc/home-network-dns.conf.pre-trusted-dns` **不得移回 `/etc/dnsmasq.d/`**：dnsmasq 会将其误读为第二份配置并启动失败。
 - `home-network-transparent.service` 调用 `client/transparent-local.sh start|stop|status`，启动 `tun2socks-linux-amd64`；IPv4 仅本机 OUTPUT：国内 IP 集合 `home_cn_v4`（来源 `client/cn_cidrs.txt`）、本地/内网、SS 服务端与国内 DNS 走原物理路由；其余打 `0x4000` 进路由表 `201` → tun0。**main 表的物理默认路由始终是 `via 192.168.3.1 dev enp3s0`**，不要将 tun0 写入 main 默认路由。规则链 `HOME_PROXY_V4`；启动前做 SOCKS5/DNS 检查，启动后测试无显式代理 Google 204、BigModel 200；异常会清理。
 - 已启用上述系统服务和 dnsmasq 的开机启动，停启验收成功；**尚未真实重启机器验收**。代理仅保证本机 IPv4：IPv6 Google 尚不通；局域网设备未接入（dnsmasq 只监听 loopback，FORWARD 仍由 Docker/Tailscale 管理且默认 DROP），**绝不能声称全家网络已代理**。
-- Steam 当前与浏览器均属 `zeromixs` 用户；Steam 及 steamwebhelper 在 GNOME 的 `app-gnome-steam-*.scope` cgroup 中。用户要求 Steam 客户端+商店+下载+游戏**全部直连**，但**尚未实现/验证**；用户要求暂不关闭 Steam。不能按 `--uid-owner zeromixs` 绕过代理（会误伤浏览器），不能仅凭 Steam 域名/IP 清单声称覆盖所有游戏；DNS 也需隔离。修改 Steam 启动方式前先确认用户同意关闭/重新启动且无游戏下载或游戏进行中。
+- 用户最终要求：**Steam 游戏和下载必须直连**；社区/API 等网页直连失败时允许代理例外（当前尚无例外）。`home-network-steam-direct.service` 创建专用 `steam-direct` IPv4 netns：`steam0=10.253.74.2/30` → 主机 `steam-host=10.253.74.1/30` → 仅 `enp3s0` 的专用 FORWARD/NAT；`/etc/netns/steam-direct/resolv.conf` 用 `223.5.5.5` 与 `119.29.29.29`，不走主机 SOCKS5 DNS。用户级桌面入口 `~/.local/share/applications/steam.desktop` 已从原来的发行版软链接替换为 `client/steam-direct-launch.sh` 包装器（所有 `Exec=`）；原软链接目标记在 `client/steam-desktop-original-link.txt`，原 desktop 内容在 `client/steam.desktop.original`。Steam 已在用户许可且无游戏/下载时重启；Steam 主进程与 steamwebhelper 的 `/proc/<pid>/ns/net` 均与 `/run/netns/steam-direct` 同 inode，且观察到 Steam 外部 TCP 连接源 IP 为 `10.253.74.2`，直连商店 HTTP 200。**未实测真实游戏联机与实际游戏下载**；勿声称已完成这两项业务验收。游戏应从此 Steam 进程启动并按进程 netns 核对；从外部另起的游戏可能不在隔离环境。网页代理例外尚未实现，勿将共享 CDN 的域名/IP 当成下载例外（可能使下载走代理）。
 
 ## 检查与验证（只读优先）
 
 ```bash
-ssh zeromixs@100.109.165.99 'ip -4 route show default; ip -4 rule show; systemctl is-enabled home-network-ss-local home-network-dns home-network-transparent dnsmasq; systemctl is-active home-network-ss-local home-network-dns home-network-transparent dnsmasq; sudo -n bash ~/mango/home-network/client/transparent-local.sh status'
+ssh zeromixs@100.109.165.99 'ip -4 route show default; ip -4 rule show; systemctl is-enabled home-network-ss-local home-network-dns home-network-transparent home-network-steam-direct dnsmasq; systemctl is-active home-network-ss-local home-network-dns home-network-transparent home-network-steam-direct dnsmasq; sudo -n bash ~/mango/home-network/client/transparent-local.sh status; sudo -n ip netns exec steam-direct ip -4 route show default' 
 ssh zeromixs@100.109.165.99 'dig @127.0.0.1 www.google.com A +short +time=3 +tries=1 | head; dig @127.0.0.1 www.baidu.com A +short +time=3 +tries=1 | head; curl --noproxy "*" -4 -sk --max-time 8 -o /dev/null -w "google=%{http_code}\n" https://www.google.com/generate_204; curl --noproxy "*" -4 -sk --max-time 6 -o /dev/null -w "bigmodel=%{http_code}\n" https://open.bigmodel.cn; curl -sk --socks5-hostname 127.0.0.1:1080 --max-time 8 -o /dev/null -w "SOCKS-google=%{http_code}\n" https://www.google.com/generate_204'
 ```
 
 期望：物理默认路由保持不变，Google `204`、BigModel `200`、SOCKS5 Google `204`。不要只凭一次 `curl` 判断稳定；真实浏览器需打开 Google 搜索页（`/generate_204` 返回空内容，Chromium 的 `page.goto` 可能报 `ERR_ABORTED`，不代表 Google 不可达）。验证国内百度、Docker、SSH/Tailscale 及 IPv6 的边界另行做。
 
-服务日志：`sudo journalctl -u home-network-{ss-local,dns,transparent} -n 50 --no-pager`，dnsmasq 用 `sudo journalctl -u dnsmasq -n 50 --no-pager`。服务启停：`sudo systemctl stop|start home-network-transparent`；它的 `ExecStop` 调用脚本清理，正常不用手动改 iptables。服务单元位于 `/etc/systemd/system/home-network-{ss-local,dns,transparent}.service`，DNS 配置实际位于 `/etc/dnsmasq.d/home-network.conf`。旧 `client/tun2socks.sh` 有过错误的 `--uid-owner`、`RETURN` 分流和重复挂链问题，**不要再次运行**；以 `transparent-local.sh` 为准。
+服务日志：`sudo journalctl -u home-network-{ss-local,dns,transparent,steam-direct} -n 50 --no-pager`；dnsmasq 用 `sudo journalctl -u dnsmasq -n 50 --no-pager`。服务启停：`sudo systemctl stop|start home-network-transparent`；它的 `ExecStop` 调用脚本清理。Steam 隔离单元 `home-network-steam-direct.service` 启动 `client/steam-direct-net.sh`，**停隔离服务前先退出 Steam/游戏**，否则脚本会拒绝停；登录桌面通过 `steam-direct-launch.sh` 启动。服务单元位于 `/etc/systemd/system/home-network-{ss-local,dns,transparent,steam-direct}.service`。DNS 配置在 `/etc/dnsmasq.d/home-network.conf`。旧 `client/tun2socks.sh` 曾有错误的 UID/分流和重复挂链问题，**不要再次运行**；以 `transparent-local.sh` 为准。
 
 ## 操作流程与安全边界
 
@@ -39,7 +39,8 @@ ssh zeromixs@100.109.165.99 'dig @127.0.0.1 www.google.com A +short +time=3 +tri
 
 - 原本 dnsmasq 国内上游解析 Google 会得到被污染的地址；现其非国内域名通过 SOCKS5 查询可信 DNS。`curl --socks5-hostname` 能访问 Google **不证明**本机 DNS 或 TUN 正常，需分别查。
 - `ip route get <IP>` 不带 `mark` 返回 main 路由，**不能证明** mangle OUTPUT 打标无效；需配合 `ip route get <IP> mark 0x4000`、iptables 计数器和实测流量。SS 服务端 ICMP ping 超时也**不能说明** TCP 或服务不可达；应看 SSH、服务端监听、SOCKS5 实测。
-- 主机有 IPv6 默认路由，当前仅 IPv4 代理；Google IPv6 直连失败。Steam 全直连、局域网试点、真实重启验证以及运行中 tun2socks 单独退出时的恢复机制尚未完成。
+- 主机有 IPv6 默认路由，当前仅 IPv4 代理；Google IPv6 直连失败。Steam 隔离环境本身仅配置 IPv4（无 IPv6 默认路由），避免 Steam IPv6 流量绕入主机代理；真实游戏联机/下载、局域网试点、真实重启验证以及运行中 tun2socks 单独退出时的恢复机制尚未完成。
 - DNS 经可信上游失败时国内白名单可能仍可解析，其他域名会失败；代理服务是否自恢复要看日志/健康检查，不能只看 `active`。
 - Terraform SSH 私钥、SS 密码、Mango token 都是敏感资料：不在对话、日志和技能中回显。曾在排障输出中泄露旧凭据，后续安排轮换，但轮换需与客户端、服务端同步并经用户确认。
+- Steam 回退：先征求用户允许退出 Steam/游戏，核实 `pgrep -x steam` 为空；将 `client/steam-desktop-original-link.txt` 所记软链接目标恢复为 `~/.local/share/applications/steam.desktop`（不要覆盖发行版目标文件）；`sudo systemctl disable --now home-network-steam-direct` 并核对专用 FORWARD/NAT、netns 已移除。切勿只撤销 netns 而不恢复桌面入口。Steam 游戏下载与网页可能共用 CDN，若将网页域名/IP 加入主机代理例外，必须先证明不会把下载也送代理。
 - 移动蜂窝网络（223.104.x 段出口）到境外 IP **高端口**的 TCP SYN-ACK 回包被运营商丢弃（表现为「只有上传没下载」/timeout），WiFi（120.244.x）正常；UDP 回向在蜂窝下也常被丢（服务器重传无应答）。**换 443 端口后蜂窝 TCP 已实测通畅**。AWS 服务器已手工加开 **443 端口** ss 实例（`shadowsocks-libev-port443`，terraform 之外配置，**重建实例后需重做**：/etc/shadowsocks-libev/config-port443.json + systemd 单元 + 安全组放行 443/tcp+udp）。移动端（V2box 等）蜂窝网络下用 443，桌面端继续 48891。诊断方法：服务端 `tcpdump -i ens5 -nn port <端口>` 看 SYN-ACK 是否重传无 ACK、UDP 是否单方面重传。蜂窝下若 Google 系网站异常，优先怀疑 QUIC（UDP）被丢。
