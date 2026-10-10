@@ -2,7 +2,7 @@
   "id": "tW7GUAczQFTZXt",
   "title": "你看看下面这个 terraform 脚本，需要我提供什么信息...",
   "createdAt": 1791620381917,
-  "updatedAt": 1791630638557,
+  "updatedAt": 1791630885077,
   "cwd": "/home/zeromixs/mango",
   "actualUsage": {
     "bigmodel-coding-plan/glm-5.2": {
@@ -12,8 +12,8 @@
       "cachedTokens": 7076736
     }
   },
-  "lastSeq": 328,
-  "lastReadSeq": 326,
+  "lastSeq": 332,
+  "lastReadSeq": 332,
   "projectId": "9gwlDGPLMfovck",
   "config": {
     "capabilities": {},
@@ -173,15 +173,16 @@
         }
       }
     },
-    "model": "custom/glm-5.2",
+    "model": "bigmodel-coding-plan/glm-5.2",
     "effort": "none",
     "lastTurnProvider": "api"
   },
-  "rev": 388,
+  "rev": 395,
   "dirtyBubbles": [
     "furoHKFJu1YE8Y",
     "Q6UWeoAlReNSZv",
-    "7aYV7xfhS5ZYhU"
+    "7aYV7xfhS5ZYhU",
+    "CYOohZQeM1QKtU"
   ],
   "backgroundJobs": [
     {
@@ -389,5 +390,5 @@
       }
     }
   ],
-  "truncateRev": 4
+  "truncateRev": 5
 }
