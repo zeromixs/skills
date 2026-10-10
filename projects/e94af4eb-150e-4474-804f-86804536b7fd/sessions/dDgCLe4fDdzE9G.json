@@ -2,7 +2,7 @@
   "id": "dDgCLe4fDdzE9G",
   "title": "激活技能并部署Mango到SSH服务器",
   "createdAt": 1791618601228,
-  "updatedAt": 1791637105721,
+  "updatedAt": 1791637311181,
   "cwd": "/Users/mvbj0698/mango",
   "actualUsage": {
     "bigmodel-coding-plan/glm-5.2": {
@@ -18,14 +18,14 @@
       "cachedTokens": 7586048
     },
     "custom/gpt-6-sol": {
-      "promptTokens": 36340849,
-      "completionTokens": 71399,
-      "totalTokens": 36412248,
-      "cachedTokens": 28385664
+      "promptTokens": 37552084,
+      "completionTokens": 71963,
+      "totalTokens": 37624047,
+      "cachedTokens": 29421184
     }
   },
-  "lastSeq": 636,
-  "lastReadSeq": 636,
+  "lastSeq": 644,
+  "lastReadSeq": 644,
   "projectId": "e94af4eb-150e-4474-804f-86804536b7fd",
   "config": {
     "capabilities": {
@@ -268,7 +268,7 @@
     "model": "mv/gpt-6-sol",
     "effort": "none"
   },
-  "rev": 685,
+  "rev": 695,
   "dirtyBubbles": [
     "rsg3dYZketqA8i",
     "jZvw87vzY6Rkg4",
@@ -290,7 +290,8 @@
     "GbtRV0AQ3xCSKy",
     "uSjolXu75Ky6Pr",
     "Evekpy7vxVLnHq",
-    "bqeVLmxWxZvM4a"
+    "bqeVLmxWxZvM4a",
+    "kFJNLYkaY42lyv"
   ],
   "truncateRev": 1
 }
